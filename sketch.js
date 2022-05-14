@@ -1,6 +1,3 @@
-
-
-// Define the gameState variable & set it to the desired inital value.
 let gameState = 'title';
 let fontRegular;
 let canvas;
@@ -14,9 +11,11 @@ var bullets;
 var asteroids;
 var ship;
 var shipImage, bulletImage, particleImage;
-let timer = 30;
+let timer = 35;
 let clock = 15;
 let bgImg;
+let score = 0;
+let win = false;
 
 var MARGIN = 40;
 let noiseMax = 5;
@@ -38,7 +37,7 @@ function preload (){
     picture[i]=loadImage("images/image"+(i+1)+".jpg");
   }
    bulletImage = loadImage('asteroids_bullet.png');
-  shipImage = loadImage('asteroids_ship0001.png');
+  shipImage = loadImage('asteroids_ship.png');
   particleImage = loadImage('asteroids_particle.png');
   img = loadImage("firevortex.gif");
   ig = loadImage("firevortexpurple.gif")
@@ -140,15 +139,16 @@ function keyReleased() {
       gameState = 'youWin';
     }
     }
-  else if (gameState === 'lvl2') {
+  else if (gameState === 'youWin') {
     if (key === 's' || key === 'S' ) {
-      gameState = 'gameOver';
+      gameState = 'gameover';
     }
     }
-    else if(key == "R" || key == "r"){
+    if(key == "R" || key == "r"){
     mr = int(random(picture.length));
     bgImg = picture[mr];
     console.log(picture[mr]);
+    score += 2;
   }
   }
 
@@ -203,8 +203,10 @@ function gameStage1() {
     timer --;
   }
   if (timer == 0) {
-    gameState = 'gameover';
+    gameState = 'youWin';
   }
+
+
 function keyPressed(){
 
 }
@@ -221,11 +223,13 @@ function keyPressed(){
   textAlign(CENTER);
   text('Destroy the asteroids!', width*0.5, height*0.1);
   textSize(30);
-  text('Press "X" to shoot!', width*0.5, height*0.2);
   textSize(30);
-  text('Move with the arrow keys!', width*0.5, height*0.85);
+  text('Press "S" to add aliens', width*0.5, height*0.85);
   textSize(30);
   text('Press "R" to travel through time.', width*0.5, height*0.95);
+ //The string "Score: " is concatenated to the score variable, which helps explain to the player what the number means
+ text("Score: " + score, width*0.5, height*0.2);
+
 
   stroke(255);
   fill(255);
@@ -264,11 +268,14 @@ function keyPressed(){
   }
   function asteroidHit(asteroid, bullet) {
   var newType = asteroid.type-1;
+  score += 1;
 
+push()
   if(newType>0) {
     createAsteroid(newType, asteroid.position.x, asteroid.position.y);
     createAsteroid(newType, asteroid.position.x, asteroid.position.y);
   }
+pop()
 
   for(var i=0; i<10; i++) {
     var p = createSprite(bullet.position.x, bullet.position.y);
@@ -293,7 +300,7 @@ function gameStage2() {
     timer --;
   }
   if (timer == 0) {
-    gameState = 'gameover';
+    gameState = 'youWin';
   }
 function keyPressed(){
 
@@ -311,11 +318,11 @@ function keyPressed(){
   textAlign(CENTER);
   text('Destroy the asteroids!', width*0.5, height*0.1);
   textSize(30);
-  text('Press "X" to shoot!', width*0.5, height*0.2);
   textSize(30);
   text('Move with the arrow keys!', width*0.5, height*0.85);
   textSize(30);
   text('Press "R" to travel through time.', width*0.5, height*0.95);
+  text("Score: " + score, width*0.5, height*0.2);
 
   stroke(255);
   fill(255);
@@ -354,6 +361,7 @@ function keyPressed(){
   }
   function asteroidHit(asteroid, bullet) {
   var newType = asteroid.type-1;
+  score += 1;
 
   if(newType>0) {
     createAsteroid(newType, asteroid.position.x, asteroid.position.y);
@@ -389,7 +397,10 @@ function youWin() {
   strokeWeight(5)
   textSize(75);
   textAlign(CENTER);
-  text('YOU WIN', width*0.5, height*0.55);
+  text("Score: " + score, width*0.5, height*0.55);
+  textSize(45);
+  text('Press "S" to continue.', width*0.5, height*0.65);
+
 }
 
 
@@ -404,4 +415,6 @@ function gameOver() {
   textSize(75);
   textAlign(CENTER);
   text('GAME OVER', width*0.5, height*0.55);
+  textSize(30);
+  text('Restart the Vortex to Play Again', width*0.5, height*0.65);
 }
