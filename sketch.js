@@ -27,6 +27,7 @@ let picture=[];
 let mr;
 
 
+
 function preload (){
   vortex = loadImage('vortex.gif')
   portal = loadImage('portal.gif')
@@ -41,6 +42,7 @@ function preload (){
   particleImage = loadImage('asteroids_particle.png');
   img = loadImage("firevortex.gif");
   ig = loadImage("firevortexpurple.gif")
+   sound = loadSound('blaster .mp3');
 }
 // Set up
 function setup() {
@@ -185,9 +187,15 @@ function instructionScreen() {
  textSize(30);
  text('Press "X" to shoot!', width*0.5, height*0.2);
  textSize(30);
- text('Move with the arrow keys!', width*0.5, height*0.85);
+ text('Move with the arrow keys!', width*0.5, height*0.3);
  textSize(30);
- text('Press "R" to travel through time.', width*0.5, height*0.95);
+ text('Press "R" to travel through time!', width*0.5, height*0.4);
+ text('Asteroids and Aliens: +1', width*0.5, height*0.5);
+ text('Time Travel: +2', width*0.5, height*0.6);
+ text('Press "S" to continue!', width*0.5, height*0.8);
+ textSize(50);
+  text('Allons-Y!', width*0.5, height*0.7);
+
 
  stroke(255);
  fill(255);
@@ -202,12 +210,10 @@ function gameStage1() {
   if (frameCount % 60 == 0 && timer > 0) { // if the frameCount is divisible by 60, then a second has passed. it will stop at 0
     timer --;
   }
-  if (timer == 0) {
-    gameState = 'youWin';
-  }
 
 
-function keyPressed(){
+
+function keyReleased(){
 
 }
    textAlign(CENTER, CENTER);
@@ -266,6 +272,7 @@ function keyPressed(){
     bullet.life = 30;
     bullets.add(bullet);
   }
+
   function asteroidHit(asteroid, bullet) {
   var newType = asteroid.type-1;
   score += 1;
@@ -290,6 +297,10 @@ pop()
 }
 
   drawSprites();
+  if (timer == 0) {
+    gameState = 'youWin';
+     saveCanvas('mycanvas', 'png')
+  }
 }
 
 function gameStage2() {
@@ -319,9 +330,8 @@ function keyPressed(){
   text('Destroy the asteroids!', width*0.5, height*0.1);
   textSize(30);
   textSize(30);
-  text('Move with the arrow keys!', width*0.5, height*0.85);
   textSize(30);
-  text('Press "R" to travel through time.', width*0.5, height*0.95);
+  text('Hurry before time is out!', width*0.5, height*0.9);
   text("Score: " + score, width*0.5, height*0.2);
 
   stroke(255);
@@ -388,6 +398,10 @@ function keyPressed(){
 }
 
   drawSprites();
+  if (timer == 0) {
+    gameState = 'youWin';
+     saveCanvas('mycanvas', 'png')
+  }
 }
 
 function youWin() {
