@@ -16,4 +16,5 @@ function createAlien(type, x, y) {
   a.setCollider('circle', 0, 0, 50);
   asteroids.add(a);
   return a;
+score += 2;
 }

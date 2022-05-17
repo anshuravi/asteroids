@@ -16,6 +16,7 @@ let clock = 15;
 let bgImg;
 let score = 0;
 let win = false;
+let blaster;
 
 var MARGIN = 40;
 let noiseMax = 5;
@@ -25,6 +26,21 @@ var scl = 10;
 var cols, rows;
 let picture=[];
 let mr;
+let bubble1;
+let bubble2;
+let bubble3;
+let bubble4;
+let bubble5;
+let bubble6;
+let star1;
+let star2;
+let star3;
+let star4;
+let star5;
+let star6;
+let song;
+let bm;
+
 
 
 
@@ -42,16 +58,29 @@ function preload (){
   particleImage = loadImage('asteroids_particle.png');
   img = loadImage("firevortex.gif");
   ig = loadImage("firevortexpurple.gif")
-   sound = loadSound('blaster .mp3');
+   song = loadSound('shoot.mp3');
+   bm = loadSound('music.mp3');
 }
 // Set up
 function setup() {
   canvas = createCanvas(500, 500);
+  bm.play();
   canvas.parent('sketch-holder');
   frameRate(60);
   textFont(fontRegular);
   bgImg = landscape;
-
+  bubble1 = new Bubble();
+ bubble2 = new Bubble();
+ bubble3 = new Bubble();
+ bubble4 = new Bubble();
+ bubble5 = new Bubble();
+ bubble6 = new Bubble();
+ star1 = new Star();
+star2 = new Star();
+star3 = new Star();
+star4 = new Star();
+star5 = new Star();
+star6 = new Star();
   ship = createSprite(width/2, height/2);
   ship.maxSpeed = 6;
   ship.friction = 0.98;
@@ -69,6 +98,7 @@ function setup() {
     var px = width/2 + 1000 * cos(radians(ang));
     var py = height/2+ 1000 * sin(radians(ang));
     createAsteroid(3, px, py);
+
   }
 function keyPressed(){
     if (key === 's' || key === 'S' ) {
@@ -76,7 +106,8 @@ function keyPressed(){
     var ang = random(360);
     var px = width/2 + 1000 * cos(radians(ang));
     var py = height/2+ 1000 * sin(radians(ang));
-    createAlien(3, px, py);
+    createAlien(4, px, py);
+
 }
 }
 }
@@ -169,6 +200,33 @@ function titleScreen() {
 
 function instructionScreen() {
   background(bgImg);
+  bubble1.move();
+   bubble1.show();
+   bubble2.move();
+   bubble2.show();
+   bubble3.move();
+   bubble3.show();
+   bubble4.move();
+   bubble4.show();
+   bubble5.move();
+   bubble5.show();
+   bubble6.move();
+   bubble6.show();
+
+   star1.show();
+   star2.move();
+   star2.show();
+   star3.move();
+   star3.show();
+   star4.move();
+   star4.show();
+   star5.move();
+   star5.show();
+   star6.move();
+   star6.show();
+
+
+
   noStroke();
   fill(255, 128, 128);
   textSize(30);
@@ -195,7 +253,6 @@ function instructionScreen() {
  text('Press "S" to continue!', width*0.5, height*0.8);
  textSize(50);
   text('Allons-Y!', width*0.5, height*0.7);
-
 
  stroke(255);
  fill(255);
@@ -266,6 +323,7 @@ function keyReleased(){
 
   if(keyWentDown('x'))
   {
+    song.play();
     var bullet = createSprite(ship.position.x, ship.position.y);
     bullet.addImage(bulletImage);
     bullet.setSpeed(10+ship.getSpeed(), ship.rotation);
@@ -363,6 +421,7 @@ function keyPressed(){
 
   if(keyWentDown('x'))
   {
+    song.play();
     var bullet = createSprite(ship.position.x, ship.position.y);
     bullet.addImage(bulletImage);
     bullet.setSpeed(10+ship.getSpeed(), ship.rotation);
@@ -382,7 +441,6 @@ function keyPressed(){
   if(newType>0) {
     createAlien(newType, asteroid.position.x, asteroid.position.y);
     createAlien(newType, asteroid.position.x, asteroid.position.y);
-
   }
 
   for(var i=0; i<10; i++) {
@@ -431,4 +489,41 @@ function gameOver() {
   text('GAME OVER', width*0.5, height*0.55);
   textSize(30);
   text('Restart the Vortex to Play Again', width*0.5, height*0.65);
+}
+class Bubble {
+  constructor(x, y, r) {
+    this.x = 250;
+    this.y = 250;
+  }
+
+  move() {
+    this.x = this.x + random(-5, 5);
+    this.y = this.y + random(-5, 5);
+  }
+
+  show() {
+    stroke(255);
+    strokeWeight(4);
+    fill(255);
+    ellipse(this.x, this.y, 5, 5);
+  }
+}
+
+class Star {
+  constructor(x, y, r) {
+    this.x = 250;
+    this.y = 250;
+  }
+
+  move() {
+    this.x = this.x + random(-5, 5);
+    this.y = this.y + random(-5, 5);
+  }
+
+  show() {
+    stroke(255);
+    strokeWeight(4);
+    fill(255);
+    ellipse(this.x, this.y, 1, 1);
+  }
 }
