@@ -93,8 +93,60 @@ button {
   font-family: 'Play', sans-serif;
   font-weight: bold;
   font-size: large;
-  margin-left: 100px;
+  margin-left: 80px;
   margin-top: 50px;
+  display: block;
+  padding: 10px;
+  color: #ffffff;
+  background-color: #9b42f5;
+  border-radius: 20%;
+  border-style: solid;
+  border-color: inherit;
+  width: 200px;
+  height: 50px;
+  outline: none;
+}
+.resources {
+  font-family: 'Play', sans-serif;
+  font-weight: bold;
+  font-size: large;
+  margin-left: 80px;
+  margin-top: 50px;
+  display: block;
+  padding: 10px;
+  color: #ffffff;
+  background-color: #9b42f5;
+  border-radius: 20%;
+  border-style: solid;
+  border-color: inherit;
+  width: 200px;
+  height: 50px;
+  outline: none;
+}
+
+.library {
+  font-family: 'Play', sans-serif;
+  font-weight: bold;
+  font-size: large;
+  margin-top: -50px;
+  display: block;
+  padding: 10px;
+  color: #ffffff;
+  background-color: #9b42f5;
+  border-radius: 20%;
+  border-style: solid;
+  border-color: inherit;
+  width: 200px;
+  height: 50px;
+  outline: none;
+}
+
+.music {
+  font-family: 'Play', sans-serif;
+  font-weight: bold;
+  font-size: large;
+  margin-right: 80px;
+  margin-top: -50px;
   display: block;
   padding: 10px;
   color: #ffffff;
