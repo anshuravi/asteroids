@@ -313,13 +313,7 @@ function keyReleased(){
     ship.rotation -= 4;
   if(keyDown(RIGHT_ARROW))
     ship.rotation += 4;
-  if(keyDown(UP_ARROW))
-  {
-    ship.addSpeed(0.2, ship.rotation);
-    ship.changeAnimation('thrust');
-  }
-  else
-    ship.changeAnimation('normal');
+
 
   if(keyWentDown('x'))
   {
@@ -342,13 +336,7 @@ push()
   }
 pop()
 
-  for(var i=0; i<10; i++) {
-    var p = createSprite(bullet.position.x, bullet.position.y);
-    p.addImage(particleImage);
-    p.setSpeed(random(3, 5), random(360));
-    p.friction = 0.95;
-    p.life = 15;
-  }
+
 
   bullet.remove();
   asteroid.remove();
@@ -411,13 +399,6 @@ function keyPressed(){
     ship.rotation -= 4;
   if(keyDown(RIGHT_ARROW))
     ship.rotation += 4;
-  if(keyDown(UP_ARROW))
-  {
-    ship.addSpeed(0.2, ship.rotation);
-    ship.changeAnimation('thrust');
-  }
-  else
-    ship.changeAnimation('normal');
 
   if(keyWentDown('x'))
   {
@@ -443,13 +424,6 @@ function keyPressed(){
     createAlien(newType, asteroid.position.x, asteroid.position.y);
   }
 
-  for(var i=0; i<10; i++) {
-    var p = createSprite(bullet.position.x, bullet.position.y);
-    p.addImage(particleImage);
-    p.setSpeed(random(3, 5), random(360));
-    p.friction = 0.95;
-    p.life = 15;
-  }
 
   bullet.remove();
   asteroid.remove();
